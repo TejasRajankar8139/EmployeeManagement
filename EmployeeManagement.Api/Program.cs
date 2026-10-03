@@ -1,3 +1,4 @@
+using EmployeeManagement.Api.Middleware;
 using EmployeeManagement.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,16 +14,22 @@ namespace EmployeeManagement.Api
             // Add services to the container.
 
             builder.Services.AddControllers();
-
+            // Swagger
+            builder.Services.AddEndpointsApiExplorer();
+            builder.Services.AddSwaggerGen();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
 
             app.UseHttpsRedirection();
 
+            app.UseSwagger();
+            app.UseSwaggerUI();
+
+
             app.UseAuthorization();
 
-
+            app.UseMiddleware<ExceptionHandlingMiddleware>();
             app.MapControllers();
 
             app.Run();

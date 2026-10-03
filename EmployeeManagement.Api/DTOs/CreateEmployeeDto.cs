@@ -1,24 +1,19 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace EmployeeManagement.Infrastructure.Entities
+namespace EmployeeManagement.Api.DTOs
 {
-    public class Employee
+    public class CreateEmployeeDto
     {
-        public Guid Id { get; set; }
-
         [Required]
-        [MaxLength(100)]
         public string FirstName { get; set; } = string.Empty;
 
         [Required]
-        [MaxLength(100)]
         public string LastName { get; set; } = string.Empty;
 
         [Required]
-        [MaxLength(100)]
+        [EmailAddress]
         public string Email { get; set; } = string.Empty;
 
-        [MaxLength(100)]
         public string? Department { get; set; }
 
         public DateTime DateOfJoining { get; set; }
