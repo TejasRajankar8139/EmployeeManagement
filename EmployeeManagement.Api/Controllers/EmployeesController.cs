@@ -67,40 +67,29 @@ namespace EmployeeManagement.Api.Controllers
             return Ok(employee);
         }
 
-
-        //POST /api/employees(Creates a new employee, returns 201 Created with the location header)
-        [HttpPost]
-        public async Task<ActionResult<Employee>> CreateEmployee(Employee employee)
-        {
-            _context.Employees.Add(employee);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction(nameof(GetEmployeeById), new { id = employee.Id }, employee);
-        }
-
         // POST /api/employees
         // Creates a new employee and returns 201 Created
-        //[HttpPost]
-        //public async Task<ActionResult<Employee>> CreateEmployee(CreateEmployeeDto dto)
-        //{
-        //    var employee = new Employee
-        //    {
-        //        Id = Guid.NewGuid(),
-        //        FirstName = dto.FirstName,
-        //        LastName = dto.LastName,
-        //        Email = dto.Email,
-        //        Department = dto.Department,
-        //        DateOfJoining = dto.DateOfJoining,
-        //        IsActive = dto.IsActive
-        //    };
+        [HttpPost]
+        public async Task<ActionResult<Employee>> CreateEmployee(CreateEmployeeDto dto)
+        {
+            var employee = new Employee
+            {
+                Id = Guid.NewGuid(),
+                FirstName = dto.FirstName,
+                LastName = dto.LastName,
+                Email = dto.Email,
+                Department = dto.Department,
+                DateOfJoining = dto.DateOfJoining,
+                IsActive = dto.IsActive
+            };
 
-        //    _context.Employees.Add(employee);
+            _context.Employees.Add(employee);
 
-        //    await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
 
-        //    return CreatedAtAction(nameof(GetEmployeeById), new { id = employee.Id },
-        //        employee);
-        //}
+            return CreatedAtAction(nameof(GetEmployeeById), new { id = employee.Id },
+                employee);
+        }
 
         //PUT /api/employees/{id} (Updates an existing employee, returns 404 if missing)
 

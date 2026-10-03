@@ -23,13 +23,15 @@ namespace EmployeeManagement.Api
 
             app.UseHttpsRedirection();
 
+            app.UseMiddleware<ExceptionHandlingMiddleware>();
+
             app.UseSwagger();
             app.UseSwaggerUI();
 
 
             app.UseAuthorization();
 
-            app.UseMiddleware<ExceptionHandlingMiddleware>();
+
             app.MapControllers();
 
             app.Run();
