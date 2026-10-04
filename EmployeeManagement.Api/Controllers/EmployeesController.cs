@@ -70,24 +70,47 @@ namespace EmployeeManagement.Api.Controllers
         // POST /api/employees
         // Creates a new employee and returns 201 Created
         [HttpPost]
+        //public async Task<ActionResult<Employee>> CreateEmployee(CreateEmployeeDto dto)
+        //{
+        //    var employee = new Employee
+        //    {
+        //        Id = Guid.NewGuid(),
+        //        FirstName = dto.FirstName,
+        //        LastName = dto.LastName,
+        //        Email = dto.Email,
+        //        Department = dto.Department,
+        //        DateOfJoining = dto.DateOfJoining,
+        //        IsActive = dto.IsActive
+        //    };
+
+        //    _context.Employees.Add(employee);
+
+        //    await _context.SaveChangesAsync();
+
+        //    return CreatedAtAction(nameof(GetEmployeeById), new { id = employee.Id },
+        //        employee);
+        //}
+        [HttpPost]
         public async Task<ActionResult<Employee>> CreateEmployee(CreateEmployeeDto dto)
         {
             var employee = new Employee
             {
-                Id = Guid.NewGuid(),
+                Id = Guid.NewGuid(),       // ⭐ Important
                 FirstName = dto.FirstName,
                 LastName = dto.LastName,
                 Email = dto.Email,
                 Department = dto.Department,
                 DateOfJoining = dto.DateOfJoining,
-                IsActive = dto.IsActive
+                IsActive = true
             };
 
             _context.Employees.Add(employee);
 
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetEmployeeById), new { id = employee.Id },
+            return CreatedAtAction(
+                nameof(GetEmployeeById),
+                new { id = employee.Id },
                 employee);
         }
 
